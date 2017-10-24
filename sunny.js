@@ -125,7 +125,7 @@ function drawFrame(){
 }
 
 function rays(){
-	stroke(255, 227, 109);
+	stroke(255, 227, 109, 150);
 	strokeWeight(2);
 	push();
 		translate(sunX, sunY);
