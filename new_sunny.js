@@ -18,6 +18,8 @@ flowersList = [];
 
 particles = [];
 
+gradientHeight = 0;
+
 //brush = []; //rainbow brush
 
 //source : https://p5js.org/examples/color-linear-gradient.html
@@ -79,11 +81,15 @@ function setup(){
 }
 
 function draw(){
+	c4 = color(252, 255, 130, 100);
+	c3 = color(0);
+	background(0);
+	if(gradientHeight < 500)
+		gradientHeight++;
+	setGradient(0, canvasHeight - gradientHeight, canvasWidth, gradientHeight, c3, c4, 'Y_AXIS');
+	
 	c1 = color(0);
 	c2 = color(0);
-	// setGradient(0, 0, canvasWidth, canvasHeight, c1, c2, 'Y_AXIS');
-	background(0);
-
 	//rays
 	frameRate(10);
 	drawRays();
@@ -110,6 +116,7 @@ function draw(){
 		melting = [];
 	}
 	c1.levels[0] = redness;
+	fill(0);
 	setGradient(mouseX-boxSize/2, mouseY-boxSize/2, boxSize, boxSize, c1, c2, 'Y_AXIS');
 	noStroke();
 	rect(mouseX-boxSize/2, mouseY-boxSize/2, boxSize, boxSize);
@@ -151,7 +158,7 @@ function draw(){
 function drawRays(){
 	push();
 		translate(sunX, sunY);
-		stroke(206, 204, 107, random(20,80));
+		stroke(206, 204, 107, random(180,200));
 		strokeWeight(2);
 		rotate(-0.1);
 		
@@ -176,8 +183,9 @@ function melt(x, y){
 
 function showDrops(){
 	for(var i = 0; i< melting.length; i++){
-		fill(200, 0, 0);
-		ellipse(melting[i][0], melting[i][1], 2, 2);
+		fill(0);
+		stroke(150,0,0);
+		ellipse(melting[i][0], melting[i][1], 3, 3);
 		if(melting[i][1] < 700)
 			melting[i][1]+=random(5,20);
 	}
@@ -222,6 +230,7 @@ class Particle{
 		// this.trail.forEach(function(element){
 		//  ellipse(element[0], element[1], r, r);
 		// });
+		noStroke();
 		ellipse(this.x, this.y, this.r, this.r);
 		
 		if(this.y > 500){
@@ -231,6 +240,7 @@ class Particle{
 		}
 		else{
 			this.y = canvasHeight;
+			this.color = color(252, 255, 130);
 		}
 		this.trail.push([this.x, this.y]);
 	}
