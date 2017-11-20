@@ -1,3 +1,3 @@
-Illustrating "sunny"
-
-Place the mouse under the light
+# CreativeCoding_Project_2
+Drawing Machine
+A brush and patterns that replicate the stroke of the brush.
