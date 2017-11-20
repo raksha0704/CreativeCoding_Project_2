@@ -18,6 +18,7 @@ function setup(){
 	listOfStrokes.push(new OneStroke());
 // 	c = color(123,2,3);
 // 	console.log(c[0]);
+	//background(0);
 }
 
 function mouseDragged() {
@@ -50,6 +51,7 @@ class OneStroke{
 		this.smallPathDone = false;
 		this.ringSize = 20;
 		this.strokeColor = color(0,0,0);
+		this.mainOpacity = 1;
 	}
 
 	drawMainLine(){
@@ -57,8 +59,11 @@ class OneStroke{
 		//counter will cut the path and also avoid unnecessary iterations
 		for(var i = 1; i < this.path.length; i++){
 			//console.log(path[i-1]);
+			//noStroke();
+			stroke(255-0.5*i, 255-0.5*i, 255-0.5*i,this.mainOpacity);
 			line(this.path[i-1][0], this.path[i-1][1], this.path[i][0], this.path[i][1]);
 			//newCounter = i;
+			//stroke(0);
 			//console.log(counter, newCounter);
 		}
 	}
@@ -71,10 +76,15 @@ class OneStroke{
 				for(var i = 0; i < 10; i++){
 					//line(0,0,10,10);
 					//draw the small pattern here
+					if(this.strokeColor.levels[0]<150)
+						this.strokeColor.levels[0]++;
+					// if(this.strokeColor.levels[0]>=255 && this.strokeColor.levels[1]<200)
+					// 	this.strokeColor.levels[1]++;
+					 // if(this.strokeColor.levels[1]<=255)
+					 // 	this.strokeColor.levels[2]++;
+					console.log(this.strokeColor);
 					for(var j = 1; j < this.smallPath.length; j++){
-						//this.strokeColor.levels[]++;
 						stroke(this.strokeColor);
-						//console.log(this.strokeColor);
 						line(this.smallPath[j-1][0], this.smallPath[j-1][1], this.smallPath[j][0], this.smallPath[j][1]);
 					}
 					rotate(0.5);
